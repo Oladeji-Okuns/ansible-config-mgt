@@ -1,3 +1,3 @@
 # ansible-config-mgt
 
-The objective of this project is to implement automation using Ansible.
+The objective or purpose of this project is to implement automation using Ansible.
