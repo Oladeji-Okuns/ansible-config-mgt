@@ -1,0 +1,38 @@
+---
+- name: Update web, nfs and db servers
+  hosts: webservers:nfs
+  become: yes
+  tasks:
+    - name: Ensure wireshark is at the latest version (web/nfs)
+      yum:
+        name: wireshark
+        state: latest
+
+- name: Common tasks for web servers
+  hosts: webservers  # Only target web servers
+  become: yes  # Use sudo to execute tasks
+  tasks:
+
+    - name: Create Documents folder
+      file:
+        path: "/home/Documents"  # Path to create the folder
+        state: directory
+        mode: '0755'
+
+    - name: Change timezone on web servers
+      timezone:
+        name: "America/New_York"  # Change this to your desired timezone
+
+
+- name: Update DB server
+  hosts: db
+  become: yes
+  tasks:
+    - name: Update apt repo
+      apt:
+        update_cache: yes
+
+    - name: Ensure wireshark is at the latest version (db)
+      apt:
+        name: wireshark
+        state: latest
