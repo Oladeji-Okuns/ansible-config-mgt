@@ -1,7 +1,5 @@
----
 # tasks file for webserver
-#
-# ---
+---
 - name: Install Apache
   become: true
   ansible.builtin.yum:
@@ -30,6 +28,7 @@
   ansible.builtin.service:
     name: httpd
     state: started
+    enabled: true  # Ensure httpd starts on boot
 
 - name: Remove Unnecessary Directory
   become: true
