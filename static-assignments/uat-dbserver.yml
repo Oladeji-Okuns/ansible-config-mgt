@@ -1,0 +1,5 @@
+---
+- name: Configure database server
+  include_role:
+    name: mysql  # Make sure this matches the actual role name for MySQL
+
