@@ -1,10 +1,17 @@
 ---
-- hosts: all
-  import_playbook: ../static-assignments/common.yml
+# Import common tasks for all hosts
+- import_playbook: ../static-assignments/common.yml
 
-- hosts: uat-webservers
-  import_playbook: ../static-assignments/uat-webservers.yml
+# Play for web servers
+- hosts: uat_webservers  # Make sure this matches your inventory
+  tasks:
+    - name: Deploy web servers
+      include_tasks: ../static-assignments/uat-webservers.yml  # Use include_tasks instead of import_playbook
 
+# Play for database servers
 - hosts: database_servers
-  import_playbook: ../static-assignments/uat-dbserver.yml
+  become: yes  # Ensure all tasks in this play run as root
+  tasks:
+    - name: Configure database servers
+      include_tasks: ../static-assignments/uat-dbserver.yml  # Use include_tasks instead of import_playbook
 

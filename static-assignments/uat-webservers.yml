@@ -1,5 +1,6 @@
 ---
-- hosts: uat-webservers
-  roles:
-     - webserver
+- name: Deploy web server
+  # Your task implementation here, e.g., using roles or specific tasks
+  include_role:
+    name: webserver
 
